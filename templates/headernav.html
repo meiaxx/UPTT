@@ -1,0 +1,76 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+    body {
+        background-image: url('/static/images/iii.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .navbar {
+        background-color: #f9004d; /* Cambiar el color de fondo de la barra de navegación */
+    }
+
+    .navbar-brand {
+        font-size: 40px;
+        font-family: 'Karla', sans-serif;
+        color: #fff; /* Cambiar el color del texto del logo a blanco */
+    }
+
+    .navbar-nav {
+        font-family: 'Karla', sans-serif;
+    }
+
+    .nav-item {
+        margin-right: 15px;
+    }
+
+    .nav-link {
+        font-size: 20px;
+        color: #fff; /* Cambiar el color del texto de los enlaces a blanco */
+        transition: 0.5s;
+    }
+
+    .nav-link:hover {
+        color: #000; /* Cambiar el color del texto al pasar el mouse */
+    }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">UPTT</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('requisitos') }}">Requisitos y Carreras</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('download') }}">Planillas UPTT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('sedes') }}">Núcleos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('galeria') }}">Galería</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contacto') }}">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

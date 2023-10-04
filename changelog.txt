@@ -1,0 +1,16 @@
+# Actualizaciones | UPTT | 2023
+
+1) Base de Datos, eliminen la db actual de su computadora y usen está actualizada
+ya que se agregaron nuevas tablas y columnas
+
+comando:
+mysql -u su_usuario -p su_contrasña < db.sql
+
+2) se agrego más seguridad, por ejemplo en la subida de imagen solo permite archivos (jpg,jpeg,png)
+
+3) formularios sanitizados
+
+4) mejor estilo
+
+5) modulo de asistencia de presencia o ausencia, para comprobar 
+

@@ -1,0 +1,133 @@
+* {
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .navbar {
+    background-color: #007bff;
+  }
+
+  .profile-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  .profile-username {
+    color: #888;
+    margin-top: 10px;
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background-color: grey;
+    margin: 30px 0;
+  }
+
+  .date-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .date-icon {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .date-text {
+    font-size: 20px;
+  }
+
+  .date-icon i {
+    font-size: 24px;
+  }
+
+  .reminder-section {
+    margin-top: 20px;
+  }
+
+  .reminder-section label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .small-textarea {
+    height: 100px;
+    width: 500px;
+    /* Ajusta el ancho según tus necesidades */
+    resize: none;
+    margin: 0 auto;
+    /* Centra el campo de textarea horizontalmente */
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0062cc;
+    border-color: #0062cc;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+  }
+
+  .profile-time {
+    font-size: 25px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+  }
+
+  .same-size-button {
+    width: 200px;
+    /* Ajusta el ancho según tus necesidades */
+    height: 80px;
+    /* Ajusta la altura según tus necesidades */
+  }
+
+  .btn-carnet {
+    font-size: 30px;
+  }
+
+  .btn-carnet-clave {
+    font-size: 25px;
+  }
+
+  #horaentrada {
+    margin-left: 15px;
+  }
+
+.vertical-center {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

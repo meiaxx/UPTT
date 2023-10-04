@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Administración || UPTT</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="../static/images/ico.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css">
+
+
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="../static/images/logouptt.png" class="logo">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" style="margin-left: 20px;" href="{{url_for('home')}}">
+            <h2>Inicio</h2>
+          </a>
+        </li>
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('download') }}">
+            <h2>Plantillas</h2>
+          </a>
+        </li>
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('contacto') }}">
+            <h2>Contacto</h2>
+          </a>
+        </li>
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('perfil') }}">
+            <h2>Perfil</h2>
+          </a>
+        </li>
+      </ul>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+              <script>
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'error',
+                      text: "{{message}}",
+                      showConfirmButton: true,
+                      timer: 5000
+                  })
+              </script>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+      
+      <form class="form-inline my-2 my-lg-0" method="post" data-toggle="modal" data-target="#usuarioModal">
+        <input class="form-control mr-sm-2" name="cedula" type="text" placeholder="Buscar Usuario" id="cedulaInput" onKeyDown="if(this.value.length==8) return false;" onkeypress="return event.charCode >= 48 && event.charCode <= 57" required>
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+      </form>
+      <a href="{{ url_for('logout') }}" class="btn btn-danger ml-2">Salir</a>
+    </div>
+  </nav>
+  
+  <hr class="divider">
+
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-sm-12 text-center mb-3">
+        <h2 class="mb-4">Bienvenido(a) | <b>{{ user[1] }} {{ user[2] }}</b></h2>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="col-sm-12">
+          <div class="d-flex align-items-center">
+            <div class="text-center">
+              <img src="uploads/{{ user[11] }}" class="profile-image" alt="Imagen de perfil">
+            </div>
+            <div class="ml-4">
+              <h2 class="profile-name">{{ user[1] }}</h2>
+              <h3 class="profile-username">{{ user[8] }}</h3>
+              <h3 class="profile-occupation">{{ user[10] }}</h3>
+            </div>
+            <div class="ml-auto">
+              <p class="text-center profile-time" style="color: #333;" id="horaentrada">Hora de Entrada: {{
+                hora_entrada }}</p>
+              <p class="text-center profile-time" style="color: #333;">Hora de Salida: {{ hora_salida
+                }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <!-- Botones de marcar hora de entrada y salida -->
+    <div class="container mt-3">
+      <div class="row justify-content-center">
+        <div class="col-sm-12">
+          <div class="d-flex justify-content-between">
+            <form method="post" class="text-center" id="marcar-entrada-form">
+              <input type="hidden" name="tipo" value="entrada" id="entrada-state">
+              <button id="entradaBtn" class="btn btn-primary btn-lg same-size-button" type="submit">Marcar Hora de Entrada</button>
+            </form>
+            <form method="post" class="text-center" id="marcar-salida-form">
+              <input type="hidden" name="tipo" value="salida">
+              <button id="salidaBtn" class="btn btn-primary btn-lg same-size-button" type="submit">Marcar Hora de Salida</button>
+            </form>
+            <a type="button" href="{{ url_for('generate_carnet') }}" class="btn btn-primary btn-lg same-size-button btn-carnet">Carnet</a>
+            <a href="{{ url_for('asistencia') }}" class="btn btn-primary btn-lg same-size-button btn-carnet-clave" type="submit">Asistencia</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    
+    <hr class="divider">
+    
+    <div class="date-section">
+      <div class="date-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+        viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+        <path
+        d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z" />
+      </svg>
+    </div>
+    <div class="date-text">
+      <span class="date"></span>
+    </div>
+  </div>
+  
+  <hr class="divider">
+  
+  <div class="container">
+    <div class="reminder-section text-center">
+      <label for="reminder">Recordatorios:</label>
+    </div>
+  <br>
+  
+  <div class="card mt-3 w-25 mx-auto d-block">
+    <div class="card-body d-flex">
+      <button width="25" class="mx-auto d-block btn btn-primary" data-bs-toggle="modal" data-bs-target="#task-modal">Crear</button>
+    </div>
+  </div>
+  <br><br>
+
+    <!-- Tasks -->
+    <div class="row row-col-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-4 mt-3">
+        {% for task in tasks %}
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        {{task.title}}
+                    </div>
+                    <div class="card-body">
+                        {{task.description}}
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        {{task.date_task}}
+                        <form action="/delete-task" method="POST">
+                            <input type="hidden" value="{{task.id}}" name="id">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+
+
+  <!-- Task Modal -->
+  <div class="modal fade" id="task-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Recordatorio</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/new-task" method="post">
+            <label>Título</label>
+            <input type="text" class="form-control mb-3" name="title">
+            <label>Descripción</label>
+            <textarea class="form-control mb-3" rows="5" name="description"></textarea>
+            <button type="submit" class="btn btn-primary w-100">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+
+
+
+  <!-- Enlaces a los archivos JavaScript de Bootstrap y función para mostrar la hora -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="../static/js/dashboard.js"></script>  
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Generar Carnet || UPTT</title>
+  <!-- Enlaces a los archivos CSS de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="../static/css/carnet.css">
+  <link rel="icon" type="image/x-icon" href="../static/images/ico.ico">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!--<a class="navbar-brand" href="#">Dashboard</a>-->
+    <img src="../static/images/logouptt.png" class="logo">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" style="margin-left: 20px;" href="{{url_for('home')}}">
+            <h2>Inicio</h2>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('download') }}">
+            <h2>Plantillas</h2>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('contacto') }}">
+            <h2>Contacto</h2>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{{ url_for('perfil') }}">
+            <h2>Perfil</h2>
+          </a>
+        </li>
+      </ul>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+      {% with messages = get_flashed_messages() %}
+          {% if messages %}
+              {% for message in messages %}
+              <script>
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'error',
+                      text: "{{message}}",
+                      showConfirmButton: true,
+                      timer: 5000
+                  })
+              </script>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+
+      <a href="{{ url_for('logout') }}" class="btn btn-danger ml-2">Salir</a>
+    </div>
+  </nav>
+  
+  <hr class="divider">
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+              <h1 class="text-center">Creación de Carnet</h1>
+              <form method="POST">
+                  <div class="form-group">
+                      <input type="text" class="form-control" id="cedula" name="cedula" placeholder="Ingrese la Cédula">
+                  </div>
+                  <div class="text-center" id="button-container">
+                      <!-- Agrega el botón de Generar con el id "generate-button" -->
+                      <button type="submit" class="btn btn-primary" id="generate-button">Generar</button>
+                      <a href="{{ url_for('cuenta') }}"  type="button" class="btn btn-danger">Cancelar</a>
+                  </div>
+              </form>
+              <!-- Agrega el mensaje de carga y la barra de progreso con los ids correspondientes -->
+              <div class="text-center" id="loading-message" style="display: none;">
+                  Generando carnet, por favor espere...
+              </div>
+              <div class="text-center" id="progress-container" style="display: none;">
+                  <div>Generando carnet, por favor espere...</div>
+                  <progress id="progress-bar" value="0" max="100"></progress>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Agrega el código JavaScript al final del archivo HTML -->
+  <script>
+      // Función para mostrar la barra de progreso y ocultar el formulario
+      function showProgressBar() {
+          document.getElementById("button-container").style.display = "none";
+          document.getElementById("progress-container").style.display = "block";
+      }
+
+      // Función para actualizar la barra de progreso
+      function updateProgressBar(percentage) {
+          document.getElementById("progress-bar").value = percentage;
+      }
+
+      // Función para simular la generación del carnet
+      function simulateCarnetGeneration() {
+          showProgressBar();
+
+          // Simular la generación del carnet
+          const totalTime = 5000; // Tiempo de generación en milisegundos
+          const interval = 100; // Intervalo de actualización de la barra de progreso
+          let currentTime = 0;
+
+          const progressInterval = setInterval(function () {
+              if (currentTime >= totalTime) {
+                  clearInterval(progressInterval);
+                  // Ocultar la barra de progreso y mostrar el botón "Generar"
+                  document.getElementById("progress-container").style.display = "none";
+                  document.getElementById("button-container").style.display = "block";
+              } else {
+                  const percentage = (currentTime / totalTime) * 100;
+                  updateProgressBar(percentage);
+                  currentTime += interval;
+              }
+          }, interval);
+      }
+
+      // Agrega el evento clic al botón de Generar
+      document.getElementById("generate-button").addEventListener("click", function () {
+          // Ocultar el botón "Generar" y mostrar la barra de progreso
+          document.getElementById("generate-button").style.display = "none";
+          simulateCarnetGeneration();
+      });
+  </script>
+  
+  <br>
+  </div>
+
+  <!-- Enlaces a los archivos JavaScript de Bootstrap y función para mostrar la hora -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="../static/js/carnet.js"></script>  
+
+  </body>
+</html>

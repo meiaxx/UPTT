@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión || UPTT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/ico.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    {% include 'headernav.html' %}
+    <br><br>
+
+    <div class="container">
+        <h1 class="text-center">Iniciar sesión</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <br>
+                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <script>
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                text: "{{message}}",
+                                showConfirmButton: true,
+                                timer: 5000
+                            })
+                        </script>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <br>
+                <form method="post">
+                    <div class="form-group">
+                        <label for="usuario">Usuario</label>
+                        <input type="text" name="usuario" class="form-control" id="usuario" placeholder="Ingresa tu usuario" maxlength="8" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="contrasena">Contraseña</label>
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" id="contrasena" placeholder="Ingresa tu contraseña" required>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="ver-ocultar-contraseña">
+                                    <i class="fa fa-eye" id="icono-ojo"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        <a href="{{ url_for('registro') }}" class="btn btn-primary">Registro</a>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="{{ url_for('olvidocontraseña') }}" class="btn btn-danger">¿Olvidaste tu contraseña?</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro de Asistencia</title>
+    <!-- Agrega enlaces a los archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Agrega estilos personalizados aquí si es necesario */
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Asistencia</h1>
+        <form method="post" action="/guardar_asistencia">
+            <div class="form-group">
+                <label for="date">Fecha:</label>
+                <input type="date" class="form-control" name="date" id="date" min="1921-01-01" max="2023-12-31" required>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            <select class="form-control" name="status">
+                                <option value="unset">--Seleccione--</option>
+                                <option value="presence">Presencia</option>
+                                <option value="absence">Ausencia</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar Asistencia</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Agrega enlaces a los archivos JavaScript de Bootstrap y jQuery si es necesario -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
